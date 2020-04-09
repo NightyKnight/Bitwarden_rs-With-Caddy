@@ -1,0 +1,25 @@
+#docker-compose.yml
+
+version: "3"
+
+services:
+  bitwarden:
+    image: bitwardenrs/server
+    restart: always
+    volumes:
+      - /opt/bitwarden:/data
+    environment:
+      WEBSOCKET_ENABLED: "true" # Required to use websockets
+      SIGNUPS_ALLOWED: "true" # set to false to disable signups
+      ADMIN_TOKEN: "admin"
+
+  caddy:
+    image: abiosoft/caddy
+    restart: always
+    volumes:
+      - ./Caddyfile:/etc/Caddyfile:ro
+      - /etc/ssl/private/bitwarden:/root/.caddy
+    ports:
+      - 443:443
+    environment:
+		DOMAIN: "https://bitwarden.test"
