@@ -57,3 +57,11 @@ sudo docker run -d --name bitwarden \
 -p 443:80 \
 -p 3012:3012 \
 bitwardenrs/server:latest
+
+#Docker Compose with Caddy and Bitwarden 
+#From the directory with the docker-compose.yml and caddyfile
+sudo docker-compose up -d
+
+#View Logs from Docker container
+sudo docker logs bitwardencompose_caddy_1
+sudo docker logs bitwardencompose_bitwarden_1
